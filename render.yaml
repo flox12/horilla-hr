@@ -20,7 +20,7 @@ services:
       - key: DB_INIT_PASSWORD
         value: "AdminPassword123!"
       - key: PYTHON_VERSION
-        value: "3.10.0"
+        value: "3.11.9"   # Change from 3.10.0 to 3.11.9
 
 databases:
   # Managed PostgreSQL Database
