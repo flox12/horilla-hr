@@ -1,0 +1,30 @@
+services:
+  # Web Service for Django / Horilla HR
+  - type: web
+    name: horilla-hr
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn horilla.wsgi:application
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: horilla-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DB_INIT_PASSWORD
+        value: "AdminPassword123!"
+      - key: PYTHON_VERSION
+        value: "3.10.0"
+
+databases:
+  # Managed PostgreSQL Database
+  - name: horilla-db
+    databaseName: horilla_main
+    user: horilla
+    plan: free
